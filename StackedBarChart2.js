@@ -58,9 +58,23 @@ class StackedBarChart2 {
         console.log(gap)
         let xLabels = this.data.map(d => d[this.xValue]); // Extract x-axis labels
 
+        textSize(25);
+        textFont(fontBold);
+        noStroke();
+        fill(this.labelColour);
+        textAlign(CENTER, CENTER);
+        text("Average Monthly Rent (Ireland)", this.chartWidth/2, -this.chartHeight - 40);
+
+        // Draws y-axis label
+        push(); 
+        translate(-50, -this.chartHeight/2); 
+        rotate(90); 
+        text("Rent (in Euros)", 0, 0); 
+        pop(); 
+
         // Draw bars and corresponding labels
     
-       push()
+       push();
         translate(gap, 0);
    
         for (let i = 0; i < this.data.length; i++) {
@@ -105,7 +119,10 @@ class StackedBarChart2 {
            
             translate(this.barWidth + gap, 0);
         }
+        
         pop();
+
+
 
 // Defines legend position
 let legendX = this.chartWidth + 20; 

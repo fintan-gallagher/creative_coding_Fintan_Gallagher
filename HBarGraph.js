@@ -17,6 +17,7 @@ class HorizontalBarGraph {
         this.labelTextSize = obj.labelTextSize;
         this.xValue = obj.xValue;
         this.numTicks = obj.numTicks;
+        this.chartTitle = obj.chartTitle;
     }
 
     render() {
@@ -40,6 +41,8 @@ class HorizontalBarGraph {
             let tickX = map(i, 0, this.numTicks, 0, this.chartWidth);
             let tickValue = Math.round(i * (this.maxValue / this.numTicks)); // Compute tick value
             textAlign(CENTER, CENTER);
+            textSize(15);
+            textFont(fontRegular);
             text(tickValue, tickX, 15); // Adjusted label position
         }
     
@@ -48,13 +51,21 @@ class HorizontalBarGraph {
     
         let xLabels = this.data.map(d => d[this.xValue]); // Extract x-axis labels
     
+        textSize(25);
+        textFont(fontBold);
+        noStroke();
+        fill(this.labelColour);
+        textAlign(CENTER, CENTER);
+        text(this.chartTitle, this.chartWidth/2 + 10, -this.chartHeight - 40);
+
         // Draw bars and corresponding labels
         for (let i = 0; i < this.data.length; i++) {
+            noStroke();
             let barHeight = this.data[i][this.yValue] * this.scale;
             fill(this.barColour[i % this.barColour.length]);
             rect(0, -(i + 1) * gap, barHeight, -this.barWidth); // Adjusted bar position
     
-            noStroke();
+            
             fill(this.labelColour);
     
             // Set text alignment based on label rotation

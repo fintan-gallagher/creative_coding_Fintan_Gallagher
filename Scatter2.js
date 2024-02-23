@@ -35,16 +35,9 @@ class Scatter2 {
         for (let i = 0; i <= this.numTicks; i++) {
             push();
             translate(0, i * (-this.chartHeight / this.numTicks));
-            line(0, 0, -5, 0); // Draw tick marks
+            line(0, 0, this.chartWidth, 0); // Draw tick marks
             pop();
         }
-
-        // Label the ticks along the y-axis
-        // Adjust maxValue to be divisible by numTicks
-        // let adjustedMaxValue = this.maxValue;
-        // while (adjustedMaxValue % this.numTicks !== 0) {
-        //     adjustedMaxValue++;
-        // }
         
 
        // Label the ticks along the y-axis
@@ -72,7 +65,14 @@ class Scatter2 {
         noStroke();
         fill(this.labelColour);
         textAlign(CENTER, CENTER);
-        text("Road Deaths (Female)", this.chartWidth/2, -this.chartHeight - 20); 
+        text("Average Monthly Rent (National)", this.chartWidth/2, -this.chartHeight - 40); 
+
+        // Draws y-axis label
+        push(); 
+        translate(-45, -this.chartHeight/2); 
+        rotate(90); 
+        text("Rent (in Euros)", 0, 0); 
+        pop(); 
 
         // Draw bars and corresponding labels
         push();
