@@ -8,16 +8,16 @@ let fontRegular;
 let fontBold;
 
 function preload(){
-    data = loadTable("data/combined.csv", "csv", "header");
-    fontLight = loadFont('Fonts/Montserrat-Thin.ttf')
-    fontRegular = loadFont('Fonts/Montserrat-Regular.ttf')
-    fontBold = loadFont('Fonts/Montserrat-Bold.ttf')
+    data = loadTable("data/ApartmentRent.csv", "csv", "header");
+    fontLight = loadFont('Fonts/Outfit-Thin.ttf')
+    fontRegular = loadFont('Fonts/Outfit-Regular.ttf')
+    fontBold = loadFont('Fonts/Outfit-Bold.ttf')
 }
 
 function setup(){
     background(50)
-    createCanvas(1000, 1000)
-
+    createCanvas(2000, 2000)
+    // noLoop();
     angleMode(DEGREES);
 
     numRows = data.rows.length;
@@ -45,7 +45,59 @@ function setup(){
         yPos:450,
         axisLineColour:"#d9d9d9",
         barWidth:25,
-        yValue:"Female",
+        yValue:"One Bed",
+        barColour:['#0384fc', '#47a6ff', '#62b2fc', '#82c0fa', '#99caf7', '#bbdcfa'],
+        labelColour:"#e1e1e1",
+        labelRotation:90,
+        labelTextSize:15,
+        xValue: "Year",
+        numTicks: 5
+    }
+
+    let barChart03 = {
+        data:cleanData,
+        chartHeight:400,
+        chartWidth:400,
+        xPos:600,
+        yPos:0,
+        axisLineColour:"#d9d9d9",
+        barWidth:25,
+        yValue:"One Bed",
+        barColour:['#0384fc', '#47a6ff', '#62b2fc', '#82c0fa', '#99caf7', '#bbdcfa'],
+        labelColour:"#e1e1e1",
+        labelRotation:45,
+        labelTextSize:15,
+        xValue: "Year",
+        numTicks: 5
+    }
+
+    let barChart04 = {
+        data:cleanData,
+        chartHeight:400,
+        chartWidth:400,
+        xPos:-600,
+        yPos:300,
+        axisLineColour:"#d9d9d9",
+        barWidth:25,
+        yValue:"Two Bed",
+        barColour:['#0384fc', '#47a6ff', '#62b2fc', '#82c0fa', '#99caf7', '#bbdcfa'],
+        labelColour:"#e1e1e1",
+        labelRotation:90,
+        labelTextSize:15,
+        xValue: "Year",
+        numTicks: 5
+    }
+
+    let barChart05 = {
+        data:cleanData,
+        chartHeight:400,
+        chartWidth:400,
+        xPos:600,
+        yPos:700,
+        axisLineColour:"#d9d9d9",
+        barWidth:25,
+        yValueMale: "Male",
+        yValueFemale: "Female",
         barColour:['#0384fc', '#47a6ff', '#62b2fc', '#82c0fa', '#99caf7', '#bbdcfa'],
         labelColour:"#e1e1e1",
         labelRotation:90,
@@ -54,27 +106,49 @@ function setup(){
         numTicks: 5
     }
 
-    let barChart03 = {
+    let barChart06 = {
         data:cleanData,
         chartHeight:400,
         chartWidth:400,
-        xPos:50,
-        yPos:450,
+        xPos:0,
+        yPos:700,
         axisLineColour:"#d9d9d9",
         barWidth:25,
-        yValue:"Female",
-        barColour:"#eeccee",
+        yValues: ["One Bed", "Two Bed", "Three Bed"],
+        totalValue: "Total",
+        barColour:['#0384fc', '#47a6ff', '#62b2fc', '#82c0fa', '#99caf7', '#bbdcfa'],
+        labelColour:"#e1e1e1",
+        labelRotation:90,
+        labelTextSize:15,
+        xValue: "Year",
+        numTicks: 5
+    }
+
+    let barChart07 = {
+        data:cleanData,
+        chartHeight:400,
+        chartWidth:400,
+        xPos:600,
+        yPos:0,
+        axisLineColour:"#d9d9d9",
+        barWidth:25,
+        yValue:"One Bed",
+        barColour:['#0384fc', '#47a6ff', '#62b2fc', '#82c0fa', '#99caf7', '#bbdcfa'],
         labelColour:"#e1e1e1",
         labelRotation:45,
         labelTextSize:15,
-        xValue: "Age_Group",
+        xValue: "Year",
         numTicks: 5
     }
 
 
-    // barCharts.push(new BarChart(barChart02));
-    // barCharts.push(new ScatterPlotGraph(barChart02));
-    barCharts.push(new HorizontalBarGraph(barChart03));
+    barCharts.push(new BarChart(barChart02));
+    // barCharts.push(new ScatterPlotGraph(barChart03));
+    barCharts.push(new Scatter2(barChart03));
+    barCharts.push(new HorizontalBarGraph(barChart04));
+    // barCharts.push(new StackedBarChart(barChart05));
+    barCharts.push(new StackedBarChart2(barChart06));
+    barCharts.push(new LineGraph(barChart07));
 
 }
 

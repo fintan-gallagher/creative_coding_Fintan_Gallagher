@@ -51,7 +51,7 @@ class HorizontalBarGraph {
         // Draw bars and corresponding labels
         for (let i = 0; i < this.data.length; i++) {
             let barHeight = this.data[i][this.yValue] * this.scale;
-            fill(this.barColour);
+            fill(this.barColour[i % this.barColour.length]);
             rect(0, -(i + 1) * gap, barHeight, -this.barWidth); // Adjusted bar position
     
             noStroke();

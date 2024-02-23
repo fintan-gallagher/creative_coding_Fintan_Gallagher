@@ -72,33 +72,39 @@ class ScatterPlotGraph {
     text("Road Deaths", this.chartWidth/2, -this.chartHeight - 20); 
 
     // Draw points and corresponding labels
-    // Draw points and corresponding labels
-for (let i = 0; i < this.data.length; i++) {
-    fill(this.barColour[i % this.barColour.length]);
-    let x = 25 + i * (this.chartWidth / this.data.length); // Calculate x position
-    let y = -this.data[i][this.yValue] * this.scale; // Calculate y position
-    ellipse(x, y, 10, 10); // Draw point with diameter 10
-
-    noStroke();
-    fill(this.labelColour);
-
-    // Set text alignment based on label rotation
-    if (this.labelRotation == 0) {
-        textAlign(CENTER, CENTER);
-    } else {
-        textAlign(LEFT, CENTER);
-    }
-    textSize(this.labelTextSize);
-
-    push();
-    translate(x, y + 10); // Translate to the position of the point, slightly below it
-    rotate(this.labelRotation);
-    textFont(fontRegular);
-
-    text(xLabels[i], 0, 0); // Draw label
+    for (let i = 0; i < this.data.length; i++) {
+        fill(this.barColour[i % this.barColour.length]);
+        let x = 25 + i * (this.chartWidth / this.data.length); // Calculate x position
+        let y = -this.data[i][this.yValue] * this.scale; // Calculate y position
+        ellipse(x, y, 10, 10); // Draw point with diameter 10
     
-    pop();
-}
+        noStroke();
+        fill(this.labelColour);
+    
+        // Set text alignment based on label rotation
+        if (this.labelRotation == 0) {
+            textAlign(CENTER, CENTER);
+        } else {
+            textAlign(LEFT, CENTER);
+        }
+        textSize(this.labelTextSize);
+    
+        // Draw the x-axis label
+        push();
+        translate(x, this.height + 10); // Translate to the position of the x-axis, slightly below
+        rotate(this.labelRotation);
+        textFont(fontRegular);
+        text(xLabels[i], 0, 0); // Draw label
+        pop();
+    
+        // Draw the number beside the ellipse
+        push();
+        translate(x + 15, y); // Translate to the position of the point, slightly to the right
+        rotate(this.labelRotation);
+        textFont(fontRegular);
+        text(this.data[i][this.yValue], 0, 0); // Draw number
+        pop();
+    }
     
     pop();
 }

@@ -1,4 +1,4 @@
-class BarChart {
+class Scatter2 {
     constructor(obj) {
         // Initialize properties from the passed object
         this.data = obj.data;
@@ -20,7 +20,6 @@ class BarChart {
     }
 
     render() {
-        
         // Translate to the specified position
         push();
         translate(this.xPos, this.yPos);
@@ -79,22 +78,13 @@ class BarChart {
         push();
         translate(gap, 0);
         for (let i = 0; i < this.data.length; i++) {
-            // let x = i * this.barWidth; // x position of the bar
-            // let y = this.chartHeight - this.data[i][this.yValue] * this.scale;
-
-            // if (mouseX > x && mouseX < x + barWidth && mouseY > y && mouseY < y + barHeight) {
-            //     fill(0); // Set color for text
-            //     text(this.data[i][this.yValue], this.barWidth / 2, -this.data[i][this.yValue] * this.scale - 5);
-            // }
-
             fill(this.barColour[i % this.barColour.length]);
-            rect(0, 0, this.barWidth, -this.data[i][this.yValue] * this.scale); // Draw bars
+            ellipse(this.barWidth, -this.data[i][this.yValue] * this.scale, 10, 10); // Draw ellipses
             
             noStroke();
             fill(this.labelColour);
-            textSize(this.labelTextSize);
-            textAlign(CENTER, BOTTOM);
-
+            textSize(10);
+            textAlign(CENTER, CENTER);
             text(this.data[i][this.yValue], this.barWidth / 2, -this.data[i][this.yValue] * this.scale - 5);
 
             noStroke();

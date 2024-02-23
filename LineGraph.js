@@ -1,4 +1,4 @@
-class BarChart {
+class LineGraph {
     constructor(obj) {
         // Initialize properties from the passed object
         this.data = obj.data;
@@ -20,9 +20,9 @@ class BarChart {
     }
 
     render() {
-        
         // Translate to the specified position
         push();
+        console.log(this.yValue)
         translate(this.xPos, this.yPos);
 
         // Draw axis lines
@@ -75,52 +75,52 @@ class BarChart {
         textAlign(CENTER, CENTER);
         text("Road Deaths (Female)", this.chartWidth/2, -this.chartHeight - 20); 
 
-        // Draw bars and corresponding labels
+        // Draw Lines and corresponding labels
         push();
-        translate(gap, 0);
-        for (let i = 0; i < this.data.length; i++) {
-            // let x = i * this.barWidth; // x position of the bar
-            // let y = this.chartHeight - this.data[i][this.yValue] * this.scale;
 
-            // if (mouseX > x && mouseX < x + barWidth && mouseY > y && mouseY < y + barHeight) {
-            //     fill(0); // Set color for text
-            //     text(this.data[i][this.yValue], this.barWidth / 2, -this.data[i][this.yValue] * this.scale - 5);
-            // }
+    translate(gap, 0);
 
-            fill(this.barColour[i % this.barColour.length]);
-            rect(0, 0, this.barWidth, -this.data[i][this.yValue] * this.scale); // Draw bars
-            
-            noStroke();
-            fill(this.labelColour);
-            textSize(this.labelTextSize);
-            textAlign(CENTER, BOTTOM);
+    for (let i = 0; i < this.data.length; i++) {
+        noStroke();
+        fill(this.labelColour);
+        textSize(10);
+        textAlign(CENTER, CENTER);
+        text(this.data[i][this.yValue], this.barWidth / 2, -this.data[i][this.yValue] * this.scale - 5);
 
-            text(this.data[i][this.yValue], this.barWidth / 2, -this.data[i][this.yValue] * this.scale - 5);
+        noStroke();
+        fill(this.labelColour);
 
-            noStroke();
-            fill(this.labelColour);
+        // Set text alignment based on label rotation
+        if (this.labelRotation == 0) {
+            textAlign(CENTER, CENTER);
+        } else {
+            textAlign(LEFT, CENTER);
+        }
+        textSize(this.labelTextSize);
 
-            // Set text alignment based on label rotation
-            if (this.labelRotation == 0) {
-                textAlign(CENTER, CENTER);
-            } else {
-                textAlign(LEFT, CENTER);
-            }
-            textSize(this.labelTextSize);
+        push();
+        translate(this.barWidth / 2, 10);
+        rotate(this.labelRotation);
+        textFont(fontRegular);
 
-            push();
-            translate(this.barWidth / 2, 10);
-            rotate(this.labelRotation);
-            textFont(fontRegular);
+        text(xLabels[i], 0, 0); // Draw label
 
-            text(xLabels[i], 0, 0); // Draw label
-            
-            pop();
+        pop();
+
+        // Draw lines between points
+        if (i < this.data.length - 1) {
+            stroke(this.barColour[i % this.barColour.length]);
+            line(this.barWidth / 2, -this.data[i][this.yValue] * this.scale, this.barWidth / 2 + gap + this.barWidth, -this.data[i + 1][this.yValue] * this.scale);
+        }
+
+        translate(gap + this.barWidth, 0); // Move to the next bar
+    }
+    pop();
 
             translate(gap + this.barWidth, 0); // Move to the next bar
         }
-        pop();
+        
         
         
     }
-}
+
