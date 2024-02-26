@@ -1,28 +1,38 @@
 class BarChart {
     constructor(obj) {
         // Initialize properties from the passed object
+
+        //chart positioning
         this.data = obj.data;
         this.chartWidth = obj.chartWidth;
         this.chartHeight = obj.chartHeight;
         this.xPos = obj.xPos;
         this.yPos = obj.yPos;
+
+        //colours
         this.axisLineColour = obj.axisLineColour;
+        this.barColour = obj.barColour;
+        this.labelColour = obj.labelColour;
+
+        //bar properties & data for chart scaling
         this.barWidth = obj.barWidth;
         this.yValue = obj.yValue;
         this.maxValue = Math.max(...this.data.map(d => d[this.yValue])); // Compute maximum value
         this.scale = this.chartHeight / this.maxValue; // Compute scale based on chart height and maximum value
-        this.barColour = obj.barColour;
-        this.labelColour = obj.labelColour;
-        this.labelRotation = obj.labelRotation;
-        this.labelTextSize = obj.labelTextSize;
         this.xValue = obj.xValue;
         this.numTicks = obj.numTicks;
+
+        //label properties
+        this.labelRotation = obj.labelRotation;
+        this.labelTextSize = obj.labelTextSize;
+        
+        //chart title
         this.chartTitle = obj.chartTitle;
     }
 
     render() {
         
-        // Translate to the specified position
+        // Translates to the specified position
         push();
         translate(this.xPos, this.yPos);
 
@@ -33,23 +43,15 @@ class BarChart {
 
         
 
-        // Draw ticks along the y-axis
+        // Draws ticks along the y-axis
         for (let i = 0; i <= this.numTicks; i++) {
             push();
             translate(0, i * (-this.chartHeight / this.numTicks));
-            line(0, 0, -5, 0); // Draw tick marks
+            line(0, 0, -5, 0); // Draws tick marks
             pop();
         }
 
-        // Label the ticks along the y-axis
-        // Adjust maxValue to be divisible by numTicks
-        // let adjustedMaxValue = this.maxValue;
-        // while (adjustedMaxValue % this.numTicks !== 0) {
-        //     adjustedMaxValue++;
-        // }
-        
-
-       // Label the ticks along the y-axis
+       // Labels the ticks along the y-axis
        for (let i = 0; i <= this.numTicks; i++) {
         push();
         noStroke();
@@ -58,15 +60,15 @@ class BarChart {
         textFont(fontRegular);
         textAlign(RIGHT, CENTER);
         translate(0, i * (-this.chartHeight / this.numTicks));
-        let tickValue = i * (this.maxValue / this.numTicks); // Calculate tick value based on maxValue and scale
-        let roundedTick = Math.round(tickValue); // Round the tick value
-        text(roundedTick, -10, 0); // Display the rounded tick value
+        let tickValue = i * (this.maxValue / this.numTicks); // Calculates tick value based on maxValue and number of ticks
+        let roundedTick = Math.round(tickValue); // Rounds the tick value
+        text(roundedTick, -10, 0); // Displays the rounded tick value
         pop();
     }
 
-        // Calculate gap between bars
+        // Calculates gap between bars
         let gap = (this.chartWidth - (this.data.length * this.barWidth)) / (this.data.length + 1);
-        let xLabels = this.data.map(d => d[this.xValue]); // Extract x-axis labels
+        let xLabels = this.data.map(d => d[this.xValue]); // Extracts x-axis labels
 
         // Draw title
         textSize(25);
@@ -83,32 +85,25 @@ class BarChart {
         text("Rent (in Euros)", 0, 0); 
         pop(); 
 
-        // Draw bars and corresponding labels
+        // Draws bars and corresponding labels
         push();
         translate(gap, 0);
         for (let i = 0; i < this.data.length; i++) {
-            // let x = i * this.barWidth; // x position of the bar
-            // let y = this.chartHeight - this.data[i][this.yValue] * this.scale;
-
-            // if (mouseX > x && mouseX < x + barWidth && mouseY > y && mouseY < y + barHeight) {
-            //     fill(0); // Set color for text
-            //     text(this.data[i][this.yValue], this.barWidth / 2, -this.data[i][this.yValue] * this.scale - 5);
-            // }
 
             fill(this.barColour[i % this.barColour.length]);
-            rect(0, 0, this.barWidth, -this.data[i][this.yValue] * this.scale); // Draw bars
+            rect(0, 0, this.barWidth, -this.data[i][this.yValue] * this.scale); // Draws bars
             
             noStroke();
             fill(this.labelColour);
             textSize(this.labelTextSize);
             textAlign(CENTER, BOTTOM);
 
-            text(this.data[i][this.yValue], this.barWidth / 2, -this.data[i][this.yValue] * this.scale - 5);
+            text(this.data[i][this.yValue], this.barWidth / 2, -this.data[i][this.yValue] * this.scale - 5); // Places label above bar
 
             noStroke();
             fill(this.labelColour);
 
-            // Set text alignment based on label rotation
+            // Sets text alignment based on label rotation
             if (this.labelRotation == 0) {
                 textAlign(CENTER, CENTER);
             } else {
@@ -121,11 +116,11 @@ class BarChart {
             rotate(this.labelRotation);
             textFont(fontRegular);
 
-            text(xLabels[i], 0, 0); // Draw label
+            text(xLabels[i], 0, 0); // Draws label
             
             pop();
 
-            translate(gap + this.barWidth, 0); // Move to the next bar
+            translate(gap + this.barWidth, 0); // Moves to the next bar
         }
         pop();
         

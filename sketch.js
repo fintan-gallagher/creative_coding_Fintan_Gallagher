@@ -15,7 +15,7 @@ function preload(){
 }
 
 function setup(){
-    background(50)
+    background(0)
     createCanvas(4000, 2000)
     noLoop();
     angleMode(DEGREES);
@@ -35,7 +35,7 @@ function setup(){
         axisLineColour:"#d9d9d9",
         barWidth:25,
         yValue:"Dublin",
-        barColour:['#011e38','#03325e','#023e75','#034a8c','#0068c9','#0068c9','#0384fc', '#47a6ff', '#62b2fc', '#82c0fa', '#99caf7', '#bbdcfa'],
+        barColour:['#000033', '#000066', '#000099', '#0000CC', '#0000FF', '#3333FF', '#6666FF', '#9999FF', '#CCCCFF', '#E6E6FF', '#F2F2FF', '#FFFFFF'],
         labelColour:"#e1e1e1",
         labelRotation:90,
         labelTextSize:15,
@@ -125,7 +125,7 @@ function setup(){
         barWidth:25,
         yValues: ["National", "Dublin", "GDA", "Outside GDA"],
         totalValue: "Total",
-        barColour:['#0384fc', '#62b2fc', '#99caf7', '#bbdcfa'],
+        barColour:['#0000CC', '#3333FF', '#6666FF', '#F2F2FF'],
         labelColour:"#e1e1e1",
         labelRotation:90,
         labelTextSize:15,
@@ -160,7 +160,7 @@ function setup(){
         barWidth:7.8,
         yValues: ["National", "Dublin", "GDA", "Outside GDA"],
         totalValue: "Dublin",
-        barColour:['#0384fc', '#62b2fc', '#99caf7', '#bbdcfa'],
+        barColour:['#0000CC', '#3333FF', '#6666FF', '#F2F2FF'],
         labelColour:"#e1e1e1",
         labelRotation:45,
         labelTextSize:15,
