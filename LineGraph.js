@@ -36,20 +36,23 @@ class LineGraph {
         console.log(this.yValue)
         translate(this.xPos, this.yPos);
 
-        // Draws axis lines
-        stroke(this.axisLineColour);
-        line(0, 0, 0, -this.chartHeight);
-        line(0, 0, this.chartWidth, 0);
-
+       
 
 
         // Draws ticks along the y-axis
         for (let i = 0; i <= this.numTicks; i++) {
             push();
+            stroke("#36464F")
             translate(0, i * (-this.chartHeight / this.numTicks));
             line(0, 0, this.chartWidth, 0); // Draw tick marks
             pop();
         }
+
+         // Draws axis lines
+         stroke(this.axisLineColour);
+         line(0, 0, 0, -this.chartHeight);
+         line(0, 0, this.chartWidth, 0);
+ 
 
 
         // Labels the ticks along the y-axis
@@ -85,6 +88,12 @@ class LineGraph {
         rotate(90);
         text("Rent (in Euros)", 0, 0);
         pop();
+
+         // Draws x-axis label
+         push(); 
+         translate(this.chartWidth / 2, 60); 
+         text("Year", 0, 0); 
+         pop(); 
 
         // Draw Lines and corresponding labels
         push();

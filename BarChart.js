@@ -85,6 +85,12 @@ class BarChart {
         text("Rent (in Euros)", 0, 0); 
         pop(); 
 
+         // Draws x-axis label
+         push(); 
+         translate(this.chartWidth / 2, 60); 
+         text("Year", 0, 0); 
+         pop(); 
+
         // Draws bars and corresponding labels
         push();
         translate(gap, 0);

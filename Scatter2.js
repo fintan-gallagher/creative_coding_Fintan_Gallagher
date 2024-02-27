@@ -25,7 +25,7 @@ class Scatter2 {
         //label properties
         this.labelRotation = obj.labelRotation;
         this.labelTextSize = obj.labelTextSize;
-        
+
         //chart title
         this.chartTitle = obj.chartTitle;
     }
@@ -35,36 +35,35 @@ class Scatter2 {
         push();
         translate(this.xPos, this.yPos);
 
-        // Draw axis lines
+        // Draws ticks along the y-axis
+        for (let i = 0; i <= this.numTicks; i++) {
+            push();
+            stroke("#36464F")
+            translate(0, i * (-this.chartHeight / this.numTicks));
+            line(0, 0, this.chartWidth, 0); // Draw tick marks
+            pop();
+        }
+
+        // Draws axis lines
         stroke(this.axisLineColour);
         line(0, 0, 0, -this.chartHeight);
         line(0, 0, this.chartWidth, 0);
 
-        
 
-        // Draws ticks along the y-axis
+        // Labels the ticks along the y-axis
         for (let i = 0; i <= this.numTicks; i++) {
             push();
+            noStroke();
+            textSize(15);
+            fill(this.labelColour);
+            textFont(fontRegular);
+            textAlign(RIGHT, CENTER);
             translate(0, i * (-this.chartHeight / this.numTicks));
-            line(0, 0, this.chartWidth, 0); // Draws tick marks
+            let tickValue = i * (this.maxValue / this.numTicks);
+            let roundedTick = Math.round(tickValue);
+            text(roundedTick, -10, 0);
             pop();
         }
-        
-
-       // Labels the ticks along the y-axis
-       for (let i = 0; i <= this.numTicks; i++) {
-        push();
-        noStroke();
-        textSize(15);
-        fill(this.labelColour);
-        textFont(fontRegular);
-        textAlign(RIGHT, CENTER);
-        translate(0, i * (-this.chartHeight / this.numTicks));
-        let tickValue = i * (this.maxValue / this.numTicks); 
-        let roundedTick = Math.round(tickValue); 
-        text(roundedTick, -10, 0); 
-        pop();
-    }
 
         // Calculates gap between bars
         let gap = (this.chartWidth - (this.data.length * this.barWidth)) / (this.data.length + 1);
@@ -76,22 +75,28 @@ class Scatter2 {
         noStroke();
         fill(this.labelColour);
         textAlign(CENTER, CENTER);
-        text("Average Monthly Rent (National)", this.chartWidth/2, -this.chartHeight - 40); 
+        text("Average Monthly Rent (National)", this.chartWidth / 2, -this.chartHeight - 40);
 
         // Draws y-axis label
-        push(); 
-        translate(-45, -this.chartHeight/2); 
-        rotate(90); 
-        text("Rent (in Euros)", 0, 0); 
-        pop(); 
+        push();
+        translate(-45, -this.chartHeight / 2);
+        rotate(90);
+        text("Rent (in Euros)", 0, 0);
+        pop();
+
+         // Draws x-axis label
+         push(); 
+         translate(this.chartWidth / 2, 60); 
+         text("Year", 0, 0); 
+         pop(); 
 
         // Draw ellipses and corresponding labels
         push();
         translate(gap, 0);
         for (let i = 0; i < this.data.length; i++) {
             fill(this.barColour[i % this.barColour.length]);
-            ellipse(this.barWidth, -this.data[i][this.yValue] * this.scale, 10, 10); 
-            
+            ellipse(this.barWidth, -this.data[i][this.yValue] * this.scale, 10, 10);
+
             noStroke();
             fill(this.labelColour);
             textSize(10);
@@ -115,13 +120,13 @@ class Scatter2 {
             textFont(fontRegular);
 
             text(xLabels[i], 0, 0); // Draws label
-            
+
             pop();
 
             translate(gap + this.barWidth, 0); // Moves to the next ellipses
         }
         pop();
-        
-        
+
+
     }
 }

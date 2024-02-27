@@ -15,8 +15,8 @@ function preload(){
 }
 
 function setup(){
-    background(0)
-    createCanvas(4000, 2000)
+    background(0);
+    createCanvas(3000, 2250);
     noLoop();
     angleMode(DEGREES);
 
@@ -84,7 +84,7 @@ function setup(){
         chartHeight:500,
         chartWidth:500,
         xPos:-600,
-        yPos:300,
+        yPos:800,
         axisLineColour:"#d9d9d9",
         barWidth:25,
         yValue:"Outside GDA",
@@ -102,7 +102,7 @@ function setup(){
         chartHeight:500,
         chartWidth:500,
         xPos:-1200,
-        yPos:300,
+        yPos:800,
         axisLineColour:"#d9d9d9",
         barWidth:25,
         yValue:"GDA",
@@ -168,6 +168,27 @@ function setup(){
         numTicks: 5,
     }
 
+    // orientation: "vertical" for vertical bar chart, leave "" blank for horizontal
+    let barChart07 = {
+        data:cleanData,
+        chartHeight:500,
+        chartWidth:500,
+        xPos:-900,
+        yPos:1500,
+        axisLineColour:"#d9d9d9",
+        barWidth:25,
+        yValue:"Dublin",
+        barColour:['#000033', '#000066', '#000099', '#0000CC', '#0000FF', '#3333FF', '#6666FF', '#9999FF', '#CCCCFF', '#E6E6FF', '#F2F2FF', '#FFFFFF'],
+        labelColour:"#e1e1e1",
+        labelRotation:90,
+        labelTextSize:15,
+        xValue: "Year",
+        numTicks: 10,
+        chartTitle: "Average Monthly Rent (Dublin City)",
+        orientation: "vertical"
+    }
+    
+
 
     barCharts.push(new BarChart(barChart01));
     barCharts.push(new BarChart(barChart01b));
@@ -177,6 +198,7 @@ function setup(){
     barCharts.push(new StackedBarChart2(barChart04));
     barCharts.push(new LineGraph(barChart05));
     barCharts.push(new GroupedBarChart(barChart06));
+    barCharts.push(new VBarHbar(barChart07));
 
 }
 

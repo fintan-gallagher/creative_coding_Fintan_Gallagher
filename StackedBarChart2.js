@@ -80,6 +80,12 @@ class StackedBarChart2 {
         text("Rent (in Euros)", 0, 0);
         pop();
 
+         // Draws x-axis label
+         push(); 
+         translate(this.chartWidth / 2, 60); 
+         text("Year", 0, 0); 
+         pop(); 
+
         // Draws bars and corresponding labels
 
         push();
@@ -120,9 +126,6 @@ class StackedBarChart2 {
                 noStroke();
                 rect(0, 0, this.barWidth, barHeight);
 
-
-
-
                 translate(0, barHeight);
 
             }
@@ -161,8 +164,8 @@ class StackedBarChart2 {
         pop();
 
         // Defines legend position
-        let legendX = this.chartWidth + 20;
-        let legendY = 20;
+        let legendX = this.chartWidth / 2;
+        let legendY = 100;
 
         // Draw legend
         for (let i = 0; i < this.yValues.length; i++) {

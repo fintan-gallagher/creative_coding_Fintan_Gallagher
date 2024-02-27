@@ -80,6 +80,12 @@ class GroupedBarChart {
         text("Rent (in Euros)", 0, 0);
         pop();
 
+         // Draws x-axis label
+         push(); 
+         translate(this.chartWidth / 2, 60); 
+         text("Year", 0, 0); 
+         pop(); 
+
         // Draws bars and corresponding labels
 
         push()
@@ -128,31 +134,9 @@ class GroupedBarChart {
         pop();
 
 
-        // Calculates the average of yValues
-        push();
-        let sum = 0;
-
-        for (let i = 0; i < this.data.length; i++) {
-            sum += int(this.data[i].Total);
-        }
-        console.log(sum);
-
-        let average = sum / this.data.length;
-
-        console.log(average);
-
-        // Converts the average value to a y-coordinate
-        let averageY = this.chartHeight - average * this.scale;
-        console.log(averageY);
-
-        // Draws the average line
-        stroke(255, 255, 255); // Average line colour
-        line(0, -averageY, this.chartWidth, -averageY);
-        pop();
-
         // Defines legend position
-        let legendX = this.chartWidth + 20;
-        let legendY = 20;
+        let legendX = this.chartWidth / 2;
+        let legendY = 100;
 
         // Draws legend
         for (let i = 0; i < this.yValues.length; i++) {
